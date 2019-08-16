@@ -43,7 +43,23 @@ module.exports = {
   },
 
   remove: (req, res) => {
+    let id = req.params.id
 
+    db.query(`DELETE FROM tbToko WHERE id=?`,
+    [id], 
+    function(error, response) {
+      if(error) {
+        console.log(error);
+        
+      } else {
+        let formResponse = {
+          status: 202,
+          data: response
+        }
+
+        res.json(formResponse)
+      }
+    })
   },
 
   findAll : (req,res) => {
