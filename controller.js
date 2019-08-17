@@ -16,6 +16,7 @@ module.exports = {
             status: 201,
             data: response
           }
+
           res.json(formResponse)
         }
       })
@@ -62,18 +63,30 @@ module.exports = {
     })
   },
 
-  findAll : (req,res) => {
-    db.query('SELECT * FROM tbToko', function(error, response) {
-      if(error) {
-        console.log(error);
-        
-      } else {
-        res.json(response)
-      }
-    })
-  },
+  finding : (req,res) => {
+    let queryLike = Object.keys(req.query)
+    let likeReq = req.query[queryLike]
 
-  findBy : (req, res) => {
-    db.query('')
+    if(likeReq) {
+
+      db.query(`SELECT * FROM tbToko WHERE ${queryLike} LIKE '%${likeReq}%'`, function(error, response) {
+        if(error) {
+          console.log(error);
+          
+        } else {
+         
+          res.json(response)
+        }
+      })
+    } else {
+      db.query(`SELECT * FROM tbToko`, function(error, response) {
+        if(error) {
+          console.log(error);
+          
+        } else {
+          res.json(response)
+        }
+      })
+    }
   }
 }
