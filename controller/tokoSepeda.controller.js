@@ -4,24 +4,6 @@ const Model = require('../model/tokoSepeda.model')
 const Helper = require('../helper/tokosepeda.helper')
 
 module.exports = {
-  create(req, res) {
-    const { name, brand, type, branch, price } = req.body;
-    db.query(`INSERT INTO tbToko 
-              SET name=?, brand=?, type=?, branch=?, price=?`, 
-              [name, brand, type, branch, price], 
-            function (error, response) {
-            if (error) {
-              console.log(error);
-            }
-            else {
-              let formResponse = {
-                status: 201,
-                data: response
-              };
-              res.json(formResponse);
-            }
-          });
-  },
   update(req, res) {
     let id = req.params.id;
     let { name, brand, type, branch, price } = req.body;
@@ -67,30 +49,21 @@ module.exports = {
     .catch((error) => {
       console.log(error);
     })
-    // const queryData = req.query
-    // const queryLike = Object.keys(req.query)
-    // const queryLen = Object.getOwnPropertyNames(queryData)
-    // const queryFindAll = 'SELECT * FROM tbToko'
-    // let queryResult = ''
-    // if(queryLen.length > 2) {
-    //   res.json('Sorry, parameter cannot be more than 2')
-    // } else if(queryLen.length === 0) {
-    //   queryResult = queryFindAll
-    // } else if(queryLen.length === 1) {
-    //   queryResult = queryFindAll.concat(` WHERE ${queryLike} LIKE '%${queryData[queryLike]}%'`)
-    // } else if(queryLen.length === 2) {
-    //   console.log(req.query);
-    //   queryResult = queryFindAll.concat(` WHERE
-    //                                       (${queryLike[0]} LIKE '%${queryData[queryLike[0]]}%')
-    //                                       AND
-    //                                       (${queryLike[1]} LIKE '%${queryData[queryLike[1]]}%')`)
-    // }
-    // db.query(queryResult, (error, response) => {
-    //   if(error) {
-    //     console.log(error)
-    //   } else {
-    //     res.json(response)
-    //   }
-    // })
+  },
+
+  inserData(req, res) {
+    const { name, brand, type, branch, price } = req.body
+
+    const data = {
+      name, brand, type, branch, price
+    }
+
+    Model.insertTokoData(data)
+    .then((resultData) => {
+      Helper.response(res, resultData, 201)
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 }

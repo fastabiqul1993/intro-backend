@@ -1,8 +1,8 @@
 const routes = require('express').Router()
-const { finding, create, update, remove } = require('../controller/tokoSepeda.controller')
+const { finding, inserData, update, remove } = require('../controller/tokoSepeda.controller')
 
 routes.get('/', finding)
-routes.post('/', create)
+routes.post('/', inserData)
 routes.patch('/:id', update)
 routes.delete('/:id', remove)
 

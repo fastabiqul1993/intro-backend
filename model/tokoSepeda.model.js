@@ -29,5 +29,22 @@ module.exports = {
         }
       })
     })
+  },
+
+  insertTokoData: (inputData) => {
+    return new Promise((resolve, reject) => {
+    
+      const { name, brand, type, branch, price } = inputData
+
+      db.query(`INSERT INTO tbToko SET name=?, brand=?, type=?, branch=?, price=?`, 
+              [name, brand, type, branch, price], (error, response) => {
+              if (!error) {
+                resolve(response)
+              }
+              else {
+                reject(error)
+              }
+            })
+    })
   }
 }
