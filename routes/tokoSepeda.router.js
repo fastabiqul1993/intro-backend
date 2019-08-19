@@ -1,9 +1,9 @@
 const routes = require('express').Router()
-const { finding, create, update, remove } = require('./controller')
+const { finding, create, update, remove } = require('../controller/tokoSepeda.controller')
 
 routes.get('/', finding)
 routes.post('/', create)
-routes.put('/:id', update)
+routes.patch('/:id', update)
 routes.delete('/:id', remove)
 
 module.exports = routes
