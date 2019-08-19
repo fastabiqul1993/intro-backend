@@ -1,9 +1,9 @@
 const routes = require('express').Router()
-const { finding, inserData, update, remove } = require('../controller/tokoSepeda.controller')
+const { findData, inserData, updateData, deleteData } = require('../controller/tokoSepeda.controller')
 
-routes.get('/', finding)
+routes.get('/', findData)
 routes.post('/', inserData)
-routes.patch('/:id', update)
-routes.delete('/:id', remove)
+routes.patch('/:id', updateData)
+routes.delete('/:id', deleteData)
 
 module.exports = routes

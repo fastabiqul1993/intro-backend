@@ -39,12 +39,12 @@ module.exports = {
     });
   },
 
-  finding(req, res) {
+  findData(req, res) {
     const queryData = req.query
   
     Model.getTokoData(queryData)
     .then((resultData) => {
-      Helper.response(res, resultData, 202)
+      Helper.response(res, resultData, 302)
     })
     .catch((error) => {
       console.log(error);
@@ -53,14 +53,37 @@ module.exports = {
 
   inserData(req, res) {
     const { name, brand, type, branch, price } = req.body
-
-    const data = {
-      name, brand, type, branch, price
-    }
+    const data = { name, brand, type, branch, price }
 
     Model.insertTokoData(data)
     .then((resultData) => {
       Helper.response(res, resultData, 201)
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  },
+
+  updateData(req, res) {
+    const params = req.params.id
+    const { name, brand, type, branch, price } = req.body
+    const data = { name, brand, type, branch, price, params }
+
+    Model.updateTokoData(data)
+    .then((resultData) => {
+      Helper.response(res, resultData, 301)
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  },
+
+  deleteData(req, res) {
+    const params = req.params.id
+
+    Model.deleteTokoData(params)
+    .then((result) => {
+      Helper.response(res, result, 202)
     })
     .catch((error) => {
       console.log(error);

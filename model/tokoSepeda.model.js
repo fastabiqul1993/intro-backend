@@ -3,7 +3,6 @@ const db = require('../connect')
 module.exports = {
   getTokoData : (data) => {
     return new Promise((resolve, reject) => {
-
       const params = data
       const key = Object.keys(params)
       const paramLength = Object.getOwnPropertyNames(params).length
@@ -33,7 +32,6 @@ module.exports = {
 
   insertTokoData: (inputData) => {
     return new Promise((resolve, reject) => {
-    
       const { name, brand, type, branch, price } = inputData
 
       db.query(`INSERT INTO tbToko SET name=?, brand=?, type=?, branch=?, price=?`, 
@@ -45,6 +43,37 @@ module.exports = {
                 reject(error)
               }
             })
+    })
+  },
+
+  updateTokoData: (newData) => {
+    return new Promise((resolve, reject) => {
+      const { name, brand, type, branch, price, params } = newData
+
+      db.query(`UPDATE tbToko SET name=? WHERE id=?`, 
+              [name, params], (error, response) => {
+        if (!error) {
+          resolve(response)
+        }
+        else {
+          reject(error)
+        }
+      })
+    })
+  },
+
+  deleteTokoData: (paramsData) => {
+    return new Promise((resolve, reject) => {
+      const params = paramsData
+
+      db.query(`DELETE FROM tbToko WHERE id=?`, [params], function (error, response) {
+        if (!error) {
+          resolve(response)
+        }
+        else {
+          reject(error)
+        }
+      })
     })
   }
 }
