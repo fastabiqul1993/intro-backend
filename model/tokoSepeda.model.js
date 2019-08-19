@@ -32,10 +32,10 @@ module.exports = {
 
   insertTokoData: (inputData) => {
     return new Promise((resolve, reject) => {
-      const { name, brand, type, branch, price } = inputData
+      // const { name, brand, type, branch, price } = inputData
 
-      db.query(`INSERT INTO tbToko SET name=?, brand=?, type=?, branch=?, price=?`, 
-              [name, brand, type, branch, price], (error, response) => {
+      db.query(`INSERT INTO tbToko SET ?`, 
+              [inputData], (error, response) => {
               if (!error) {
                 resolve(response)
               }
@@ -48,16 +48,16 @@ module.exports = {
 
   updateTokoData: (newData) => {
     return new Promise((resolve, reject) => {
-      const { name, brand, type, branch, price, params } = newData
-
-      db.query(`UPDATE tbToko SET name=? WHERE id=?`, 
-              [name, params], (error, response) => {
-        if (!error) {
-          resolve(response)
-        }
-        else {
-          reject(error)
-        }
+      const params = newData.params
+      const data = newData.dataBody 
+      
+      db.query(`UPDATE tbToko SET ? WHERE id=?`,
+              [data, params], (error, response) => {
+              if(!error) {
+                resolve(response)
+              } else {
+                reject(error)
+              }
       })
     })
   },
@@ -66,7 +66,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       const params = paramsData
 
-      db.query(`DELETE FROM tbToko WHERE id=?`, [params], function (error, response) {
+      db.query(`DELETE FROM tbToko WHERE id=?`, [params], (error, response) => {
         if (!error) {
           resolve(response)
         }

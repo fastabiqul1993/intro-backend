@@ -4,41 +4,7 @@ const Model = require('../model/tokoSepeda.model')
 const Helper = require('../helper/tokosepeda.helper')
 
 module.exports = {
-  update(req, res) {
-    let id = req.params.id;
-    let { name, brand, type, branch, price } = req.body;
-    let queryConcated = [];
-    // , brand=?, type=?, branch=?, price=?
-    // , brand, type, branch, price, id
-    db.query(`UPDATE tbToko SET name=? WHERE id=?`, [name, id], function (error, response) {
-      if (error) {
-        console.log(error);
-      }
-      else {
-        let formResponse = {
-          status: 301,
-          data: response
-        };
-        res.json(formResponse);
-      }
-    });
-  },
-  remove(req, res) {
-    let id = req.params.id;
-    db.query(`DELETE FROM tbToko WHERE id=?`, [id], function (error, response) {
-      if (error) {
-        console.log(error);
-      }
-      else {
-        let formResponse = {
-          status: 202,
-          data: response
-        };
-        res.json(formResponse);
-      }
-    });
-  },
-
+  
   findData(req, res) {
     const queryData = req.query
   
@@ -66,8 +32,8 @@ module.exports = {
 
   updateData(req, res) {
     const params = req.params.id
-    const { name, brand, type, branch, price } = req.body
-    const data = { name, brand, type, branch, price, params }
+    const dataBody = req.body
+    const data = { dataBody, params }
 
     Model.updateTokoData(data)
     .then((resultData) => {
