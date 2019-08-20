@@ -52,7 +52,7 @@ $ npm start
 
 ## Documentation
 
-### Store Routes
+### Books Routes
 
 #### GET Request
 
@@ -79,6 +79,7 @@ $ npm start
 
 ## Optional
 
+For demo, use this link : https://ancient-sea-92924.herokuapp.com/
 
 
 ### License
