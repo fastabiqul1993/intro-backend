@@ -1,79 +1,83 @@
-const db = require('../connect')
+const db = require("../connect");
 
 module.exports = {
-  getTokoData : (data) => {
+  getTokoData: data => {
     return new Promise((resolve, reject) => {
-      const params = data
-      const key = Object.keys(params)
-      const paramLength = Object.getOwnPropertyNames(params).length
-      
-      const queryFindAll = 'SELECT * FROM tbToko'
-      let queryResult = ''
+      //Get Query
+      const isType = data.type !== null;
+      const isBranch = data.branch !== null;
+      const type = data.type;
+      const branch = data.branch;
+      let queryTemp = "SELECT * FROM tbToko";
 
-      if(paramLength > 2) {
-        resolve('Sorry, parameter cannot be more than 2')
-      } else if(paramLength === 0) {
-        queryResult = queryFindAll
-      } else if(paramLength === 1) {
-        queryResult = queryFindAll.concat(` WHERE ${key} LIKE '%${params[key]}%'`)
-      } else if(paramLength === 2) {
-        queryResult = queryFindAll.concat(` WHERE (${key[0]} LIKE '%${params[key[0]]}%') AND (${key[1]} LIKE '%${params[key[1]]}%')`)
+      //For Pagination
+      const page = data.page || 1;
+      const limit = data.limit || 10;
+
+      if (type || branch) {
+        queryTemp += `WHERE `;
+        queryTemp += isType ? `type LIKE '${type}' ` : ``;
+        queryTemp += type && branch ? `AND ` : ``;
+        queryTemp += isBranch ? `branch LIKE '%${branch}%'` : ``;
       }
-      
+
+      const skipPage = (Number(page) - 1) * limit;
+      let queryResult = queryTemp + ` LIMIT ${skipPage}, ${limit}`;
+
+      console.log(queryResult);
+
       db.query(queryResult, (error, result) => {
-        if(!error) {
-          resolve(result)
+        if (!error) {
+          resolve(result);
         } else {
-          reject(error)
+          reject(error);
         }
-      })
-    })
+      });
+    });
   },
 
-  insertTokoData: (inputData) => {
+  insertTokoData: inputData => {
     return new Promise((resolve, reject) => {
-      // const { name, brand, type, branch, price } = inputData
-
-      db.query(`INSERT INTO tbToko SET ?`, 
-              [inputData], (error, response) => {
-              if (!error) {
-                resolve(response)
-              }
-              else {
-                reject(error)
-              }
-            })
-    })
+      db.query(`INSERT INTO tbToko SET ?`, [inputData], (error, response) => {
+        if (!error) {
+          resolve(response);
+        } else {
+          reject(error);
+        }
+      });
+    });
   },
 
-  updateTokoData: (newData) => {
+  updateTokoData: newData => {
     return new Promise((resolve, reject) => {
-      const params = newData.params
-      const data = newData.dataBody 
-      
-      db.query(`UPDATE tbToko SET ? WHERE id=?`,
-              [data, params], (error, response) => {
-              if(!error) {
-                resolve(response)
-              } else {
-                reject(error)
-              }
-      })
-    })
+      const params = newData.params;
+      const data = newData.dataBody;
+
+      db.query(
+        `UPDATE tbToko SET ? WHERE id=?`,
+        [data, params],
+        (error, response) => {
+          if (!error) {
+            resolve(response);
+          } else {
+            reject(error);
+          }
+        }
+      );
+    });
   },
 
-  deleteTokoData: (paramsData) => {
+  deleteTokoData: paramsData => {
     return new Promise((resolve, reject) => {
-      const params = paramsData
+      const params = paramsData;
 
       db.query(`DELETE FROM tbToko WHERE id=?`, [params], (error, response) => {
         if (!error) {
-          resolve(response)
+          resolve(response);
+        } else {
+          reject(error);
         }
-        else {
-          reject(error)
-        }
-      })
-    })
+      });
+    });
   }
-}
+};
