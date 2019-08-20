@@ -2,7 +2,7 @@
 
 ![](https://img.shields.io/badge/Code%20Style-Standard-informational.svg)
 ![](https://img.shields.io/badge/Dependencies-Express-success.svg)
-![](https://img.shields.io/badge/License-ISC-important.svg)
+![](https://img.shields.io/badge/License-ISC-orange.svg)
 
 <p align="center">
   <a href="https://nodejs.org/">
