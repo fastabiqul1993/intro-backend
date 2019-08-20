@@ -7,6 +7,10 @@
     "start": "node app",
     "server": "nodemon app"
   },
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/fastaman993/intro-backend.git"
+  },
   "author": "Adhy Fastabiqul Khoirot",
   "license": "ISC",
   "dependencies": {
