@@ -11,11 +11,11 @@ const {
 } = require("../Controllers/store.controller");
 
 routes.get("/", findAll);
-routes.get("/id/", findByID);
+routes.get("/:id", findByID);
 routes.get("/branch/", findByBranch);
 routes.get("/type/", findByType);
 routes.post("/", inserData);
-routes.patch("/", updateData);
-routes.delete("/", deleteData);
+routes.patch("/:id", updateData);
+routes.delete("/:id", deleteData);
 
 module.exports = routes;
