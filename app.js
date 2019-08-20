@@ -2,7 +2,7 @@ require("dotenv/config"); //metode ke 2 untuk make dotenv
 const express = require("express"); //import
 const logger = require("morgan");
 const bodyParser = require("body-parser");
-const router = require("./routes/tokoSepeda.router");
+const routerRoot = require("./src/Routes/root.routes");
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -16,6 +16,6 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/", router);
+app.use("/", routerRoot);
 
 module.exports = app;
