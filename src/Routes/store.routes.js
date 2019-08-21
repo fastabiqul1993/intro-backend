@@ -1,20 +1,17 @@
 const express = require("express");
 const routes = express.Router();
 const {
-  findAll,
+  findBy,
   findByID,
-  findByBranch,
-  findByType,
+  findByParameter,
   inserData,
   updateData,
   deleteData
 } = require("../Controllers/store.controller");
 
-routes.get("/", findAll);
-routes.get("/:id", findByID);
-routes.get("/branch/", findByBranch);
-routes.get("/type/", findByType);
+routes.get("/", findBy);
 routes.post("/", inserData);
+routes.get("/:id", findByID);
 routes.patch("/:id", updateData);
 routes.delete("/:id", deleteData);
 

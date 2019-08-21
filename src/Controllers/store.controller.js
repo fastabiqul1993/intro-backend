@@ -4,8 +4,9 @@ const Helper = require("../Helpers/controllers.helper");
 module.exports = {
   findAll(req, res) {
     const queryData = req.query;
+    console.log("masukkk find alll");
 
-    Model.getAllTokoData(queryData)
+    Model.getAll(queryData)
       .then(resultData => {
         Helper.response(res, resultData, 302);
       })
@@ -14,22 +15,10 @@ module.exports = {
       });
   },
 
-  findByType(req, res) {
+  findBy(req, res) {
     const queryData = req.query;
 
-    Model.getByType(queryData)
-      .then(resultData => {
-        Helper.response(res, resultData, 302);
-      })
-      .catch(error => {
-        Helper.response(res, error, 400);
-      });
-  },
-
-  findByBranch(req, res) {
-    const queryData = req.query;
-
-    Model.getByBranch(queryData)
+    Model.getBy(queryData)
       .then(resultData => {
         Helper.response(res, resultData, 302);
       })
@@ -77,7 +66,7 @@ module.exports = {
   },
 
   deleteData(req, res) {
-    const params = req.query.id;
+    const params = req.params.id;
     console.log(params, "ini params");
 
     Model.deleteTokoData(params)
