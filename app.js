@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const routerRoot = require("./src/Routes/root.routes");
 
 const app = express();
-const port = process.env.PORT || 3306;
+const port = process.env.PORT || 8080;
 const nodeEnv = process.env.NODE_ENV || "Production";
 
 app.listen(port, () => {
