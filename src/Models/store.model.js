@@ -66,9 +66,9 @@ module.exports = {
     });
   },
 
-  getByID: params => {
+  getByID: param => {
     return new Promise((resolve, reject) => {
-      const id = params.id;
+      const id = param;
 
       db.query(`SELECT * FROM tbBike WHERE id=?`, [id], (error, result) => {
         if (!error) {

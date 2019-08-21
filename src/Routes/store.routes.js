@@ -3,7 +3,6 @@ const routes = express.Router();
 const {
   findBy,
   findByID,
-  findByParameter,
   inserData,
   updateData,
   deleteData

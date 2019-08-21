@@ -28,7 +28,7 @@ module.exports = {
   },
 
   findByID(req, res) {
-    const queryData = req.query;
+    const queryData = req.params.id;
 
     Model.getByID(queryData)
       .then(resultData => {
