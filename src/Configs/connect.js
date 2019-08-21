@@ -2,11 +2,10 @@ require("dotenv/config");
 const mysql = require("mysql");
 
 const dbConfig = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
-  socketPath: process.env.DB_SOCKET
+  host: "lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  user: "lmag6s0zwmcswp5w.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  password: "a0ui2rq2dw2ujb4c",
+  database: "u2hdvnt8w3ixj1o4"
 });
 
 dbConfig.connect(function(error) {

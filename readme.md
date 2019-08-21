@@ -44,6 +44,7 @@ DB_HOST = "YOU-DB-HOST"
 DB_USER = "YOUR-DB-USER"
 DB_PASSWORD = "YOUR-DB-PASSWORD"
 DB_NAME = "YOUR-DB-NAME"
+DB_SOCKET = "YOUR-DB-SOCKET" //optional
 ```
 ### Start Development Server
 ```
@@ -56,26 +57,26 @@ $ npm start
 
 #### GET Request
 
- - "/store" => display all store, with default pagination {page:1, limit:5}. Query params:
-    - findAll -> display all store data,
+ - "/store/" => display all bikes, with default pagination {page:1, limit:10}. Query params:
 	- page -> page to display (default 1),
-	- limit -> number of store displayed in a page (default 5).
+	- limit -> number of bikes displayed in a page (default 10).
 
- - "/store/{storeID}" => display one store data with the id specified by ID parameter.
- - "/store/type/?type" => display store data specified by type parameter.
- - "/store/branch/?branch" => display store data specified by branch parameter.
+ - "/store/{id}" => display one bikes with the id specified by id parameter.
+ - "/store/{name}" => display bikes specified by name parameter.
+ - "/store/{type}" => display bikes specified by type parameter.
+ - "/store/{branch}" => display bikes specified by branch parameter.
 
 #### POST Request
 
- - "/store" => Inserting a new store data to database. Data required = name, brand, type, branch, price.
+ - "/store/" => Inserting a new bike to bikes tables. Data required = name, type, branch, price.
 
 #### PATCH Request
 
- - "/store/{storeID}" => Updating a existing store data in database. Data required = storeID and parameter that needs to update.
+ - "/store/{bikeID}" => Updating a existing bike in tables. Data required = bikeID and parameter that needs to update.
 
 #### DELETE Request
 
- - "/store/{storeID}" => Deleting a existing store data in database. Data required = storeID.
+ - "/store/{bikeID}" => Deleting a existing bike in tables. Data required = bikeID.
 
 ## Optional
 
