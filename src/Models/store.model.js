@@ -45,7 +45,6 @@ module.exports = {
         queryTemp += (isType && isBranch) || (isType && isName) ? `AND ` : ``;
         queryTemp += isBranch ? `branch LIKE '%${branch}%' ` : ``;
         queryTemp += isBranch && isName ? `AND ` : ``;
-        queryTemp += isType && isBranch && isName ? `AND ` : ``;
         queryTemp += isName ? `name LIKE '%${name}%'` : ``;
       }
 
